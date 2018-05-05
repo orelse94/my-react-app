@@ -10,11 +10,13 @@
   "author": "orel katz",
   "license": "ISC",
   "dependencies": {
+    "chart.js": "^2.7.2",
     "express": "^4.16.3",
+    "html-webpack-plugin": "*",
     "react": "^16.3.2",
+    "react-chartkick": "^0.2.0",
     "react-dom": "^16.3.2",
-    "recharts": "*",
-    "html-webpack-plugin": "*"
+    "recharts": "*"
   },
   "devDependencies": {
     "babel": "^6.23.0",
