@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 const returnEnv = () => {return 'ui';}
 import Clock from './Clock.jsx';
-import Charti from './Charti.jsx';
+// import Charti from './Charti.jsx';
+import FetchPg from './FetchPg.jsx';
+
+
 
 class EnvSetter extends Component {
   constructor(props) {
@@ -16,9 +19,6 @@ class EnvSetter extends Component {
       this.whichEnv =  this.changeEnv();
     }
 
-    // componentWillUnmount() {
-    //
-    // }
 
     changeEnv() {
       this.setState({
@@ -32,7 +32,7 @@ class EnvSetter extends Component {
       <div>
       <Clock />
       <h2>This pie chart is presenting {this.state.env} test enviroment.</h2>
-      <Charti />
+      <FetchPg />
       </div>
     );
   }

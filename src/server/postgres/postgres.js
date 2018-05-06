@@ -1,19 +1,49 @@
 const { Pool } = require('pg');
 const pgParams = require('./pgParams.js').retParams();
 
-// my queries
-const sqlQuery = 'select * from TestsStatus';
-const realQuery = 'select enviroment, teststatus, count(testName) from TestsStatus group by enviroment, teststatus';
 
-const retPgData = async () => {
-  const pool = new Pool(pgParams)
-  const client = await pool.connect()
+const realQuery = "SELECT \"Environment\", sts.\"StatusName\", count(org.\"Id\")\
+  	FROM public.\"TestsStatus\" as org join \"Statuses\" as sts on \"TestStatus\" = sts.\"Id\"\
+  	WHERE date_trunc('day',\"TestDate\") = to_date('30/04/2018', 'DD/MM/YYYY')\
+  	GROUP BY \"Environment\", sts.\"StatusName\"";
+
+
+
+
+const retPgData = async (query) => {
+  // this is bringing the default query back
+  query = realQuery;
+  const pool = new Pool(pgParams);
+  const client = await pool.connect();
   try {
-    const result = await client.query(realQuery)
-    console.log('hello from', result.rows)
+    const result = await client.query(realQuery);
+
+    return aggData(result.rows)
+      .catch(err => {
+        console.error(err);
+      });
   } finally {
-    client.release()
+    client.release();
   }
+
+}
+
+
+const aggData = async (pgRows) => {
+
+  const finalData = {};
+  await pgRows.map(row => {
+
+    let keys = Object.keys(row);
+    let statusArr = [row[keys[1]],row[keys[2]]];
+
+    if (!finalData[row[keys[0]]]) {
+		finalData[row[keys[0]]] = []
+	}
+	finalData[row[keys[0]]].push(statusArr);
+  })
+
+	return finalData;
 }
 
 module.exports = {

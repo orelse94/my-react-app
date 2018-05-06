@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import ReactChartkick, { LineChart, PieChart } from 'react-chartkick';
 import Chart from 'chart.js';
+import FetchPg from './FetchPg.jsx';
+
 
 const data = {
   ui : [["Failed", 10], ["Passed", 90]],
@@ -8,12 +10,19 @@ const data = {
 };
 
 class Charti extends Component {
-  // addAdapter(Chart)
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      data: data ,
+    }
+  }
+
    render() {
      return (
-       
+
        <div>
-        <PieChart data={data.ui} />
+        <PieChart data={data.api} />,
        </div>
      )
    }
