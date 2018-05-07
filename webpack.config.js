@@ -1,8 +1,9 @@
-var webpack = require('webpack');
-var path = require('path');
+const webpack = require('webpack');
+const path = require('path');
+// const GoogleFontsPlugin = require("google-fonts-webpack-plugin")
 
-var BUILD_DIR = path.resolve(__dirname, './build');
-var APP_DIR = path.resolve(__dirname, './src/client');
+const BUILD_DIR = path.resolve(__dirname, './build');
+const APP_DIR = path.resolve(__dirname, './src/client');
 
 const config = {
   mode: 'production',
@@ -34,7 +35,7 @@ const config = {
            presets: ['react', 'es2015'] // Transpiles JSX and ES6
          }
        }]
-     }
+     },
     ],
 
   }

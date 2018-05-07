@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 const returnEnv = () => {return 'ui';}
-import Clock from './Clock.jsx';
+import TopOfPage from './TopOfPage.jsx';
 // import Charti from './Charti.jsx';
 import FetchPg from './FetchPg.jsx';
 
@@ -10,9 +10,7 @@ class EnvSetter extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      env: 'api',
-    }
+
   }
 
     componentWillMount() {
@@ -30,8 +28,7 @@ class EnvSetter extends Component {
   render() {
     return (
       <div>
-      <Clock />
-      <h2>This pie chart is presenting {this.state.env} test enviroment.</h2>
+      <TopOfPage />
       <FetchPg />
       </div>
     );

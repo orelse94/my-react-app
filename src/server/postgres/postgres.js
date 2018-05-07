@@ -40,7 +40,12 @@ const aggData = async (pgRows) => {
     if (!finalData[row[keys[0]]]) {
 		finalData[row[keys[0]]] = []
 	}
-	finalData[row[keys[0]]].push(statusArr);
+    if (statusArr[0] == 'Pass') {
+      // finalData[row[keys[0]]].push(statusArr);
+      finalData[row[keys[0]]][0] =(statusArr);
+    } else {
+      finalData[row[keys[0]]][1] =(statusArr);
+    }
   })
 
 	return finalData;

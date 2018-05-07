@@ -15,47 +15,37 @@ class FetchPg extends Component {
     super(props);
     // should change this
     this.state = {
-      data: ['ui','api'],
-      data2: {ui:[["Fail","68"],["Pass","450"]],api:[["Pass","4"],["Fail","1"]]} ,
+
+      data: {},
     };
 
   }
 
-  componentWillMount() {
-
-    // this fetch isnt working now
-
+  componentDidMount() {
     fetch('/postgres/query', {  'Access-Control-Allow-Origin': '*' })
     .then(pgData => {
-      console.log('2 fetching no cors');
-      console.log({pgData});
+      console.log('fetching data from postgres');
       return pgData.json();
     })
     .then(realData => {
-      console.log('3 fetching realData ');
-
       this.setState({data: realData})
+
     })
   }
 
-
   render() {
-      return (<div>
-      {this.state.people.map((person, index) => (
-          <p>Hello, {person.name} from {person.country}!</p>
-      ))}
-      </div>);
-  }
-
-
-  render() {
+    const allEnvs = Object.keys(this.state.data);
     return (
       <div>
-      {this.state.data.map((env,index) => (
-        <PieChart data={this.state.data2[env]}/>
-      ))
-      }
-      </div>);
+        {allEnvs.map((env, index)=> (
+          <h4 className = "pietitle"> {env} Tests Coverage
+          <div>
+          <PieChart colors={["#6cae0e", "#b00"]} data={this.state.data[env]}/>
+          </div>
+          </h4>
+        ))}
+      </div>
+    );
   }
 }
 
